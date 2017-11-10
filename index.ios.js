@@ -60,6 +60,22 @@ var Braintree = {
     });
   },
 
+  //Using this Nonce for Accomplice APP.
+  getCardNonce(NonceInfo) {
+    return new Promise(function(resolve,reject) {
+      RCTBraintree.getCardNonce(
+        NonceInfo.cardNumber,
+        NonceInfo.cvv,
+        NonceInfo.postalCode,
+        NonceInfo.expDate,
+        function(err,nonce) {
+          nonce != null ? resolve(nonce) :reject("There was a problem with your card. Please try a different card.");
+        }
+      );
+    });
+  },
+
+
   getDeviceData(options = {}) {
     return new Promise(function(resolve, reject) {
       RCTBraintree.getDeviceData(options, function(err, deviceData) {
